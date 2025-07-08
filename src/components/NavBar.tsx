@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { HomeIcon, Sprout } from "lucide-react";
+import { HomeIcon, Users } from "lucide-react";
+import ModeToggle from "./ModeToggle";
 
 function NavBar() {
     return (
@@ -26,7 +27,7 @@ function NavBar() {
                             asChild
                         >
                             <Link href="/employee">
-                                <Sprout className="w-4 h-4" />
+                                <Users className="w-4 h-4" />
                                 <span className="hidden lg:inline">
                                     Employee
                                 </span>
@@ -43,6 +44,9 @@ function NavBar() {
                                 <span className="hidden lg:inline">Home</span>
                             </Link>
                         </Button>
+
+                        {/*MODE TOGGLE*/}
+                        <ModeToggle />
                     </div>
                 </div>
             </div>
