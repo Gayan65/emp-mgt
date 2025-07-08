@@ -15,7 +15,7 @@ function NavBar() {
                             href="/"
                             className="text-xl font-bold text-primary font-mono tracking-wider"
                         >
-                            EmpWin
+                            🧑‍💼 EmpWin
                         </Link>
                     </div>
 
