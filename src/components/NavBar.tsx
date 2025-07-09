@@ -1,10 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { HomeIcon, Users } from "lucide-react";
+import { HomeIcon, LogIn, Users } from "lucide-react";
 import ModeToggle from "./ModeToggle";
+import { stackServerApp } from "@/stack";
 
-function NavBar() {
+async function NavBar() {
+    const user = await stackServerApp.getUser();
+    const app = stackServerApp.urls;
+
     return (
         <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
             <div className="max-w-7xl mx-auto px-4">
@@ -47,6 +51,20 @@ function NavBar() {
 
                         {/*MODE TOGGLE*/}
                         <ModeToggle />
+
+                        {/*SIGN IN BUTTON*/}
+                        <Button
+                            variant="ghost"
+                            className="flex items-center gap-2"
+                            asChild
+                        >
+                            <Link href={app.signIn}>
+                                <LogIn className="w-4 h-4" />
+                                <span className="hidden lg:inline">
+                                    Sign In
+                                </span>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>
