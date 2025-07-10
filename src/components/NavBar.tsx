@@ -1,10 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { HomeIcon, LogIn, Users } from "lucide-react";
+import { HomeIcon, LogIn, LogOut, Users } from "lucide-react";
 import ModeToggle from "./ModeToggle";
 import { stackServerApp } from "@/stack";
-import getUserDetails from "@/actions/user.action";
+import { getUserDetails } from "@/actions/user.action";
+import { UserButton } from "@stackframe/stack";
 
 async function NavBar() {
     const user = await stackServerApp.getUser();
@@ -60,19 +61,41 @@ async function NavBar() {
                         {/*MODE TOGGLE*/}
                         <ModeToggle />
 
-                        {/*SIGN IN BUTTON*/}
-                        <Button
-                            variant="ghost"
-                            className="flex items-center gap-2"
-                            asChild
-                        >
-                            <Link href={app.signIn}>
-                                <LogIn className="w-4 h-4" />
-                                <span className="hidden lg:inline">
-                                    Sign In
-                                </span>
-                            </Link>
-                        </Button>
+                        {user ? (
+                            <>
+                                {/*SIGN OUT BUTTON*/}
+                                <Button
+                                    variant="secondary"
+                                    className="flex items-center gap-2"
+                                    asChild
+                                >
+                                    <Link href={app.signOut}>
+                                        <LogOut className="w-4 h-4" />
+                                        <span className="hidden lg:inline">
+                                            Sign Out
+                                        </span>
+                                    </Link>
+                                </Button>
+
+                                <UserButton />
+                            </>
+                        ) : (
+                            <>
+                                {/*SIGN IN BUTTON*/}
+                                <Button
+                                    variant="ghost"
+                                    className="flex items-center gap-2"
+                                    asChild
+                                >
+                                    <Link href={app.signIn}>
+                                        <LogIn className="w-4 h-4" />
+                                        <span className="hidden lg:inline">
+                                            Sign In
+                                        </span>
+                                    </Link>
+                                </Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

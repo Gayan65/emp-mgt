@@ -2,7 +2,7 @@
 
 import { neon } from "@neondatabase/serverless";
 
-export default async function getUserDetails(userId: string | undefined) {
+export async function getUserDetails(userId: string | undefined) {
     if (!process.env.DATABASE_URL) {
         throw new Error("DATABASE_URL is not set");
     }
