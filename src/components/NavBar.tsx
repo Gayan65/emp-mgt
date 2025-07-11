@@ -39,10 +39,10 @@ async function NavBar() {
                             className="flex items-center gap-2"
                             asChild
                         >
-                            <Link href="/employee">
+                            <Link href="/employees">
                                 <Users className="w-4 h-4" />
                                 <span className="hidden lg:inline">
-                                    Employee
+                                    Employees
                                 </span>
                             </Link>
                         </Button>
