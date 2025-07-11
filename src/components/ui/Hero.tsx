@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
     return (
         <section>
-            <div className="container">
+            <div className="flex justify-center mt-5 items-center">
                 <div className="grid items-center gap-8 bg-muted-2 lg:grid-cols-2">
                     <div className="flex flex-col items-center p-16 text-center lg:items-start lg:text-left">
                         <p>New Release</p>
