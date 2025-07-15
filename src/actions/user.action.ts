@@ -11,7 +11,7 @@ export async function getUserDetails(userId: string | undefined) {
         return null;
     }
 
-    const sql = neon(process.env.DATABASE_URL!);
+    const sql = neon(process.env.DATABASE_URL_AUTH!);
     const [user] =
         await sql`SELECT * FROM neon_auth.users_sync WHERE id = ${userId};`;
     return user;
