@@ -5,7 +5,7 @@ import React from "react";
 
 async function page() {
     const user = await stackServerApp.getUser();
-    const app = stackServerApp.urls;
+    //const app = stackServerApp.urls;
     return (
         <>
             {user ? (

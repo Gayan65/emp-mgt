@@ -18,6 +18,7 @@ const employees = [
         id: 111,
         name: "Gayan",
         position: "BA",
+        department: "CC",
     },
 ];
 
@@ -41,6 +42,7 @@ export function EmployeesTable() {
                         <TableHead>Employee Id</TableHead>
                         <TableHead>Employee Name</TableHead>
                         <TableHead>Position</TableHead>
+                        <TableHead>Department</TableHead>
                         <TableHead className="text-right">Amount</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -50,6 +52,7 @@ export function EmployeesTable() {
                             <TableCell>{employee.id}</TableCell>
                             <TableCell>{employee.name}</TableCell>
                             <TableCell>{employee.position}</TableCell>
+                            <TableCell>{employee.department}</TableCell>
                             <TableCell className="text-right">
                                 <div className="flex justify-end space-x-4">
                                     <h1>Edit button</h1>
