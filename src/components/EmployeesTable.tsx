@@ -12,23 +12,34 @@ import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import { Combobox } from "./ui/combo-box";
 import { useState } from "react";
+import { getEmployees } from "@/actions/employee.action";
 
-const employees = [
-    {
-        id: 111,
-        name: "Gayan",
-        position: "BA",
-        department: "CC",
-    },
-];
+type Employee = Awaited<ReturnType<typeof getEmployees>>;
 
-export function EmployeesTable() {
+interface EmployeeTableProps {
+    employees: Employee;
+}
+
+export function EmployeesTable({ employees }: EmployeeTableProps) {
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+
+    //filter employees based on the filter
+    const filteredEmployees = employees?.userEmployees?.filter(
+        (employee) =>
+            employee.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (selectedCategory === "" || employee.position === selectedCategory)
+    );
     return (
         <div className="w-full">
             <div className="flex items-center gap-2 py-4">
                 <div className="relative max-w--sm w-full">
-                    <Input placeholder="Filter employees" className="pl-10" />
+                    <Input
+                        placeholder="Filter employees"
+                        className="pl-10"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(employees.target.value)}
+                    />
                     <Search className="absolute h-4 left-3 top-1/2 transform -translate-y-1/2" />
                 </div>
                 <Combobox
@@ -47,7 +58,7 @@ export function EmployeesTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {employees.map((employee) => (
+                    {filteredEmployees?.map((employee) => (
                         <TableRow key={employee.id}>
                             <TableCell>{employee.id}</TableCell>
                             <TableCell>{employee.name}</TableCell>
