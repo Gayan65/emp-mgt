@@ -13,6 +13,7 @@ import { Search } from "lucide-react";
 import { Combobox } from "./ui/combo-box";
 import { useState } from "react";
 import { getEmployees } from "@/actions/employee.action";
+import { useRouter } from "next/navigation";
 
 type Employee = Awaited<ReturnType<typeof getEmployees>>;
 
@@ -21,6 +22,7 @@ interface EmployeeTableProps {
 }
 
 export function EmployeesTable({ employees }: EmployeeTableProps) {
+    const router = useRouter();
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -58,20 +60,31 @@ export function EmployeesTable({ employees }: EmployeeTableProps) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {filteredEmployees?.map((employee) => (
-                        <TableRow key={employee.id}>
-                            <TableCell>{employee.id}</TableCell>
-                            <TableCell>{employee.name}</TableCell>
-                            <TableCell>{employee.position}</TableCell>
-                            <TableCell>{employee.department}</TableCell>
-                            <TableCell className="text-right">
-                                <div className="flex justify-end space-x-4">
-                                    <h1>Edit button</h1>
-                                    <h1>Delete button</h1>
-                                </div>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {filteredEmployees?.map((employee) => {
+                        const slugfieldName = employee.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-");
+                        const slug = `${employee.id}--${slugfieldName}`;
+                        const employeeURL = `/employees/${slug}`;
+
+                        return (
+                            <TableRow
+                                key={employee.id}
+                                onClick={() => router.push(employeeURL)}
+                            >
+                                <TableCell>{employee.id}</TableCell>
+                                <TableCell>{employee.name}</TableCell>
+                                <TableCell>{employee.position}</TableCell>
+                                <TableCell>{employee.department}</TableCell>
+                                <TableCell className="text-right">
+                                    <div className="flex justify-end space-x-4">
+                                        <h1>Edit button</h1>
+                                        <h1>Delete button</h1>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </div>
